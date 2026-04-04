@@ -22,18 +22,47 @@ public class ProdutosDAO {
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
-    public void cadastrarProduto (ProdutosDTO produto){
+    public void cadastrarProduto (ProdutosDTO p){
+        String sql ="INSERT INTO produtos (nome , valor) VALUES (?, ?)";
+        try(Connection conn = conectaDAO.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)){
+            
+            stmt.setString(1, p.getNome());
+            stmt.setDouble(2, p.getValor());
         
-        
-        //conn = new conectaDAO().connectDB();
-        
+            stmt.execute();
+        }catch (Exception e){
+         e.printStackTrace();
+        }
         
     }
+
+ 
+    
     
     public ArrayList<ProdutosDTO> listarProdutos(){
+        ArrayList<ProdutosDTO> lista = new ArrayList<>();    
+        String sql = "SELECT * FROM prosutos";
         
-        return listagem;
+        try(Connection conn = conectaDAO.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()){
+            
+            while (rs.next()){
+                ProdutosDTO p = new ProdutosDTO();
+                
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getInt("valor"));
+                
+                lista.add(p);
+            }
+                
+        }catch(Exception e){
+    e.printStackTrace();
     }
+    return lista;}
+  
     
     
     
