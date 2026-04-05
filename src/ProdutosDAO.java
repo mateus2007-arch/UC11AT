@@ -16,11 +16,7 @@ import java.util.ArrayList;
 
 
 public class ProdutosDAO {
-    
-    Connection conn;
-    PreparedStatement prep;
-    ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+
     
     public void cadastrarProduto (ProdutosDTO p){
         String sql ="INSERT INTO produtos (nome , valor, status ) VALUES (?, ?, ?)";
@@ -33,7 +29,6 @@ public class ProdutosDAO {
         
             stmt.execute();
         }catch (Exception e){
-         e.printStackTrace();
         }
         
     }
