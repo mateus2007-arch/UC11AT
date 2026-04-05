@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 
 public class ProdutosDAO {
-
     
     public void cadastrarProduto (ProdutosDTO p){
         String sql ="INSERT INTO produtos (nome , valor, status ) VALUES (?, ?, ?)";
